@@ -1,4 +1,4 @@
-### Hi there 👋
+### Hi there 👋 I'm Jessica
 
 - 🔭 I’m currently working on diverse range of data science consulting projects
 - 🌱 I’m currently learning data engineering and data science in production
