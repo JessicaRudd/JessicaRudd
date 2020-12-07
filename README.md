@@ -1,16 +1,18 @@
 ### Hi there 👋
 
-<!--
 **jrudd1/jrudd1** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-Here are some ideas to get you started:
+- 🔭 I’m currently working on diverse range of data science consulting projects
+- 🌱 I’m currently learning data engineering and data science in production
+- 💬 Ask me about Data Science from the perspective of a social scientist (BA Anthropology, Masters in Public Health - Epidemiology)
+- 📫 How to reach me: 
+  - :bulb: [Medium articles](https://medium.com/@funsizeathlete)
+  - :office: [LinkedIn](https://www.linkedin.com/in/jmrudd/)
+- 😄 Pronouns: She/Her
+- ⚡ Fun fact: I'm an endurance athlete and have run dozens of marathons and ultramarathons, including 100 miles in 22 hours 44 minutes. 
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+[![Jessica's github stats](https://github-readme-stats.vercel.app/api?username=jrudd1&count_private=true&show_icons=true&theme=radical&hide_rank=false)](https://github.com/anuraghazra/github-readme-stats)
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jrudd1)](https://github.com/anuraghazra/github-readme-stats)
+
+<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0" alt="Recent Article 0">
