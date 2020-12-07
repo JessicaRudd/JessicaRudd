@@ -1,7 +1,5 @@
 ### Hi there 👋
 
-**jrudd1/jrudd1** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
 - 🔭 I’m currently working on diverse range of data science consulting projects
 - 🌱 I’m currently learning data engineering and data science in production
 - 💬 Ask me about Data Science from the perspective of a social scientist (BA Anthropology, Masters in Public Health - Epidemiology)
