@@ -16,3 +16,4 @@
 ### :pencil: Medium Posts - [@funsizeathlete](https://funsizeathlete.medium.com/)
 ---
 <a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0" alt="Recent Article 0">
+<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/1" alt="Recent Article 1">
