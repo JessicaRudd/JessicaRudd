@@ -1,4 +1,4 @@
-### Hi there 👋 I'm Jessica
+### Hi there 👋 I'm Jessica - @JRUDD1
 
 - 🔭 I’m currently working on diverse range of data science consulting projects
 - 🌱 I’m currently learning data engineering and data science in production
@@ -12,5 +12,8 @@
 [![Jessica's github stats](https://github-readme-stats.vercel.app/api?username=jrudd1&count_private=true&show_icons=true&theme=radical&hide_rank=false)](https://github.com/anuraghazra/github-readme-stats)
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jrudd1)](https://github.com/anuraghazra/github-readme-stats)
+
+:memo:
+:pencil: ### Medium Posts - [@funsizeathlete](https://funsizeathlete.medium.com/)
 
 <a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0" alt="Recent Article 0">
