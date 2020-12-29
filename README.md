@@ -13,4 +13,4 @@
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jrudd1)](https://github.com/anuraghazra/github-readme-stats)
 
-<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/1" alt="Recent Article 1">
+<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0:1" alt="Recent Article 0:1">
