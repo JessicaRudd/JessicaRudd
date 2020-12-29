@@ -13,7 +13,7 @@
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jrudd1)](https://github.com/anuraghazra/github-readme-stats)
 
-:memo:
-:pencil: ### Medium Posts - [@funsizeathlete](https://funsizeathlete.medium.com/)
+    :memo:
+### :pencil: Medium Posts - [@funsizeathlete](https://funsizeathlete.medium.com/)
 
 <a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0" alt="Recent Article 0">
