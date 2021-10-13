@@ -1,6 +1,6 @@
 ### Hi there 👋 I'm Jessica - @JessicaRudd
 
-- 🔭 I’m currently working on building [Mirry](www.mirry.ai), a nextgen synthetic data generation software
+- 🔭 I’m currently working on building [Mirry](https://mirry.ai/main), a nextgen synthetic data generation software
 - 🌱 I’m currently learning data engineering and data science in production
 - 💬 Ask me about Data Science from the perspective of a social scientist (BA Anthropology, Masters in Public Health - Epidemiology), and synthetic data generation with Mirry!
 - 📫 How to reach me: 
