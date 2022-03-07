@@ -1,4 +1,4 @@
-### Hi there 👋 I'm Jessica - @JessicaRudd
+### Hi there 👋 I'm Jessica - @JessicaRudd [![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/jmrudd/)
 
 - 🔭 I’m currently the Chief Artificial Intelligence Officer at [Mirry](https://mirry.ai/main), a nextgen synthetic data generation software
 - 🌱 I’m currently learning data engineering and data science in production
