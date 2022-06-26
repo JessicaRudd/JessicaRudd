@@ -2,7 +2,7 @@
 🔭 I’m currently the Chief Artificial Intelligence Officer at Mirry, building next-gen data for AI<br>🌱 I’m currently learning data engineering and data science in production<br>💬 Ask me about Data Science from the perspective of a social scientist (BA Anthropology, Masters in Public Health - Epidemiology), and synthetic data generation with Mirry!<br>😄 Pronouns: She/Her<br>⚡ Fun fact: I'm an endurance athlete and have run dozens of marathons and ultramarathons, including 100 miles in 22 hours 44 minutes.
 
 
-## 🌐 Socials:
+## 🌐 How to reach me:
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/funsizeathlete) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/jmrudd) [![Medium](https://img.shields.io/badge/Medium-12100E?logo=medium&logoColor=white)](https://medium.com/@funsizeathlete) [![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?logo=Twitter&logoColor=white)](https://twitter.com/funsizeathlete) 
 
 # 💻 Tech Stack:
