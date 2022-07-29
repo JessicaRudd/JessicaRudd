@@ -1,5 +1,5 @@
 ### Hi there 👋 I'm Jessica - @JessicaRudd [![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/jmrudd/)
-🔭 I’m currently building next-gen data for AI<br>🌱 I’m currently learning data engineering and data science in production<br>💬 Ask me about Data Science from the perspective of a social scientist (BA Anthropology, Masters in Public Health - Epidemiology), and data-centric AI!<br>😄 Pronouns: She/Her<br>⚡ Fun fact: I'm an endurance athlete and have run dozens of marathons and ultramarathons, including 100 miles in 22 hours 44 minutes.
+🔭 I’m currently building next-gen data for AI<br>🌱 I’m currently building data engineering and data science production pipelines<br>💬 Ask me about Data Science from the perspective of a social scientist (BA Anthropology, Masters in Public Health - Epidemiology), and data-centric AI!<br>😄 Pronouns: She/Her<br>⚡ Fun fact: I'm an endurance athlete and have run dozens of marathons and ultramarathons, including 100 miles in 22 hours 44 minutes.
 
 
 ## 🌐 How to reach me:
