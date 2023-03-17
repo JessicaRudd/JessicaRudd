@@ -17,7 +17,7 @@
 ### ✍️ Random Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
-### :pencil: Medium Posts - [@funsizeathlete](https://funsizeathlete.medium.com/)
+### :pencil: Substack - [Data Bytes Newsletter](https://funsizedatabytes.substack.com/)
 ---
 <a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0" alt="Recent Article 0">
 <a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/1" alt="Recent Article 1">
