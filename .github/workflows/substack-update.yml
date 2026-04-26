@@ -84,9 +84,17 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add README.md
-          # Pull latest changes from your manual edit to prevent the 'rejected' error
+          
+          # 1. Stash the changes we just made to the README
+          git stash
+          
+          # 2. Pull the latest from the remote (your manual marker edits)
           git pull --rebase origin main
-          # Only commit if there are actually changes to the links
+          
+          # 3. Pop the stash back on top of the fresh README
+          git stash pop || echo "No stash to pop"
+          
+          # 4. Final add and commit
+          git add README.md
           git commit -m "Update Substack posts via Proxy" || echo "No changes to commit"
           git push
