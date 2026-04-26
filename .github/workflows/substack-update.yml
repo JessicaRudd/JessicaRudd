@@ -2,8 +2,8 @@ name: Latest Substack Posts
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight
-  workflow_dispatch: # Allows you to run it manually from the Actions tab
+    - cron: '0 0 * * *' # Updates daily at midnight
+  workflow_dispatch: # Allows manual trigger from the Actions tab
 
 jobs:
   update-readme:
@@ -28,35 +28,35 @@ jobs:
           import requests
           import sys
 
-          # Using the JSON API which is more stable for automation
-          url = "https://funsizedatabytes.substack.com/api/v1/posts?limit=3&offset=0"
-          headers = {
-              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-              "Accept": "application/json",
-              "Referer": "https://funsizedatabytes.substack.com/"
-          }
+          # 1. Use the RSS2JSON proxy to bypass Substack's Cloudflare block
+          rss_url = "https://funsizedatabytes.substack.com/feed"
+          proxy_url = f"https://api.rss2json.com/v1/api.json?rss_url={rss_url}"
           
           try:
-              print(f"Fetching: {url}")
-              response = requests.get(url, headers=headers, timeout=20)
+              print(f"Fetching via Proxy: {proxy_url}")
+              response = requests.get(proxy_url, timeout=20)
               response.raise_for_status()
               data = response.json()
               
-              if not data:
-                  print("No posts found in the API response.")
+              if data.get("status") != "ok":
+                  print(f"Proxy error: {data.get('message')}")
                   sys.exit(1)
 
-              # Construct the Markdown list
+              items = data.get("items", [])[:3]
+              if not items:
+                  print("No posts found in proxy response.")
+                  sys.exit(1)
+
+              # 2. Build the Markdown list
               links = []
-              for post in data:
+              for post in items:
                   title = post.get('title')
-                  # Substack API uses 'slug' for the URL path
-                  link = f"https://funsizedatabytes.substack.com/p/{post.get('slug')}"
+                  link = post.get('link')
                   links.append(f"- [{title}]({link})")
 
               new_block = "\n" + "\n".join(links) + "\n\n"
 
-              # Read existing README
+              # 3. Target and Update the README file
               with open("README.md", "r", encoding="utf-8") as f:
                   lines = f.readlines()
 
@@ -67,25 +67,20 @@ jobs:
               end_idx = next((i for i, line in enumerate(lines) if end_tag in line), -1)
 
               if start_idx != -1 and end_idx != -1:
-                  # Replace only the content between the tags
+                  # Replace the section between the tags
                   lines[start_idx:end_idx+1] = [new_block]
                   with open("README.md", "w", encoding="utf-8") as f:
                       f.writelines(lines)
                   print("README updated successfully.")
               else:
-                  print("Error: Could not find or in README.md")
+                  print("Error: Markers not found in README.md")
                   sys.exit(1)
-
           except Exception as e:
-              print(f"Error during execution: {e}")
-              if 'response' in locals():
-                  print(f"Status: {response.status_code}")
-                  print(f"Response Body: {response.text[:200]}")
+              print(f"Error: {e}")
               sys.exit(1)
           END
 
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git
+          git config --local
