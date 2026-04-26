@@ -13,7 +13,7 @@ jobs:
       - name: Pull Substack Posts
         uses: gautamkrishnar/blog-post-workflow@v1
         with:
-          feed_list: "https://funsizeathlete.substack.com/feed"
+          feed_list: "https://funsizedatabytes.substack.com/feed"
           max_post_count: 3
           template: "- [$title]($url) ($date)"
           date_format: "mmm d, yyyy"
