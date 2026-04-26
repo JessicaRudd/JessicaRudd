@@ -85,5 +85,8 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add README.md
+          # Pull latest changes from your manual edit to prevent the 'rejected' error
+          git pull --rebase origin main
+          # Only commit if there are actually changes to the links
           git commit -m "Update Substack posts via Proxy" || echo "No changes to commit"
           git push
