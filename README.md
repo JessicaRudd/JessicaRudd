@@ -17,8 +17,8 @@
 ### ✍️ Random Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
-### :pencil: Substack - [Data Bytes Newsletter](https://funsizedatabytes.substack.com/)
----
+### 👩‍💻 Latest from [Fun Size Data Bytes](https://funsizedatabytes.substack.com/)
+
 
 ---
 [![](https://visitcount.itsvg.in/api?id=JessicaRudd&icon=0&color=0)](https://visitcount.itsvg.in)
