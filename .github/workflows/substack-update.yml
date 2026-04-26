@@ -2,8 +2,8 @@ name: Latest Substack Posts
 
 on:
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch: 
+    - cron: '0 0 * * *' # Updates daily at midnight
+  workflow_dispatch: # Allows manual trigger from the Actions tab
 
 jobs:
   update-readme:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Fetches full history for stable git operations
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -36,31 +36,35 @@ jobs:
           import requests
           import sys
 
+          # 1. Fetch via Proxy to bypass Cloudflare 403
           rss_url = "https://funsizedatabytes.substack.com/feed"
           proxy_url = f"https://api.rss2json.com/v1/api.json?rss_url={rss_url}"
           
           try:
+              print(f"Fetching: {proxy_url}")
               response = requests.get(proxy_url, timeout=20)
               response.raise_for_status()
               data = response.json()
               items = data.get("items", [])[:3]
               
               if not items:
-                  print("Proxy returned no data.")
+                  print("No posts found.")
                   sys.exit(1)
 
+              # 2. Format the links
               links = [f"- [{p.get('title')}]({p.get('link')})" for p in items]
               
-              # THE MARKERS MUST BE EXACTLY THESE STRINGS
+              # 3. Define the Markers (CRITICAL: Do not leave these empty)
               start_tag = ""
               end_tag = ""
               
-              # Build the block AND re-insert the tags for the next run
+              # Build the block (putting the tags back in so they persist)
               new_block = f"{start_tag}\n\n" + "\n".join(links) + f"\n\n{end_tag}"
 
               with open("README.md", "r", encoding="utf-8") as f:
                   content = f.read()
 
+              # 4. Perform the "Sandwich" replacement
               if start_tag in content and end_tag in content:
                   header = content.split(start_tag)[0]
                   footer = content.split(end_tag)[1]
@@ -70,7 +74,7 @@ jobs:
                       f.write(new_readme)
                   print("README updated successfully.")
               else:
-                  print("Could not find markers in README. Ensure tags are present.")
+                  print("Markers not found in README. Make sure they are in the file.")
                   sys.exit(1)
           except Exception as e:
               print(f"Error: {e}")
