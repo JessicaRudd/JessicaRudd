@@ -1,59 +1,72 @@
-- name: Update README
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install feedparser requests
+
+      - name: Update README
         run: |
           python << END
           import feedparser
           import requests
           import sys
 
-          # 1. High-fidelity headers to bypass 403 Forbidden
           url = "https://funsizedatabytes.substack.com/feed"
           headers = {
               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
               "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-              "Accept-Language": "en-US,en;q=0.5",
-              "Referer": "https://funsizedatabytes.substack.com/",
-              "DNT": "1"
+              "Referer": "https://funsizedatabytes.substack.com/"
           }
           
           try:
-              # Using a session to handle cookies if Substack challenges the request
-              session = requests.Session()
-              response = session.get(url, headers=headers, timeout=20)
+              response = requests.get(url, headers=headers, timeout=20)
               response.raise_for_status()
+              feed = feedparser.parse(response.text)
+              posts = feed.entries[:3]
+              
+              if not posts:
+                  print("No posts found.")
+                  sys.exit(1)
+
+              links = [f"- [{p.title}]({p.link})" for p in posts]
+              new_block = "\n" + "\n".join(links) + "\n\n"
+
+              with open("README.md", "r", encoding="utf-8") as f:
+                  lines = f.readlines()
+
+              start_tag = ""
+              end_tag = ""
+              
+              start_idx = next((i for i, line in enumerate(lines) if start_tag in line), -1)
+              end_idx = next((i for i, line in enumerate(lines) if end_tag in line), -1)
+
+              if start_idx != -1 and end_idx != -1:
+                  lines[start_idx:end_idx+1] = [new_block]
+                  with open("README.md", "w", encoding="utf-8") as f:
+                      f.writelines(lines)
+              else:
+                  print("Markers not found.")
+                  sys.exit(1)
           except Exception as e:
-              print(f"Failed to fetch feed: {e}")
-              if 'response' in locals():
-                  print(f"Status Code: {response.status_code}")
-                  print(f"Headers: {response.headers}")
-              sys.exit(1)
-
-          feed = feedparser.parse(response.text)
-          posts = feed.entries[:3]
-          
-          if not posts:
-              print("Feed was parsed but no entries found. Check URL.")
-              sys.exit(1)
-
-          # 2. Build the new Markdown block
-          links = [f"- [{p.title}]({p.link})" for p in posts]
-          new_block = "\n" + "\n".join(links) + "\n\n"
-
-          # 3. Read and Update README
-          with open("README.md", "r", encoding="utf-8") as f:
-              lines = f.readlines()
-
-          start_tag = ""
-          end_tag = ""
-          
-          start_idx = next((i for i, line in enumerate(lines) if start_tag in line), -1)
-          end_idx = next((i for i, line in enumerate(lines) if end_tag in line), -1)
-
-          if start_idx != -1 and end_idx != -1:
-              lines[start_idx:end_idx+1] = [new_block]
-              with open("README.md", "w", encoding="utf-8") as f:
-                  f.writelines(lines)
-              print("README updated successfully.")
-          else:
-              print(f"Error: Markers not found.")
+              print(f"Error: {e}")
               sys.exit(1)
           END
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Update Substack posts safely" || exit 0
+          git push
