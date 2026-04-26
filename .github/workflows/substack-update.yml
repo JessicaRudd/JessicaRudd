@@ -1,20 +1,55 @@
 name: Latest Substack Posts
 on:
   schedule:
-    - cron: '0 0 * * *' # Updates every day
+    - cron: '0 0 * * *'
   workflow_dispatch: 
 
 jobs:
-  update-readme-with-blog:
+  update-readme:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Pull Substack Posts
-        uses: gautamkrishnar/blog-post-workflow@v1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          feed_list: "https://funsizedatabytes.substack.com/feed"
-          max_post_count: 3
-          user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-          template: "- [$title]($url) ($date)"
-          date_format: "mmm d, yyyy"
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install feedparser
+
+      - name: Update README
+        run: |
+          python << END
+          import feedparser
+          import re
+
+          feed = feedparser.parse("https://funsizedatabytes.substack.com/feed")
+          posts = feed.entries[:3]
+          
+          markdown_links = ""
+          for post in posts:
+              date = post.published_parsed
+              formatted_date = f"{date.tm_mon}/{date.tm_mday}/{date.tm_year}"
+              markdown_links += f"- [{post.title}]({post.link}) ({formatted_date})\n"
+
+          with open("README.md", "r") as f:
+              content = f.read()
+
+          # Regex to replace content between the markers
+          pattern = r"().*()"
+          replacement = f"\\1\n{markdown_links}\\2"
+          new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+
+          with open("README.md", "w") as f:
+              f.write(new_content)
+          END
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Update Substack posts" || exit 0
+          git push
