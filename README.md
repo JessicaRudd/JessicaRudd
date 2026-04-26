@@ -19,8 +19,6 @@
 
 ### :pencil: Substack - [Data Bytes Newsletter](https://funsizedatabytes.substack.com/)
 ---
-<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0" alt="Recent Article 0">
-<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/1" alt="Recent Article 1">
-<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@funsizeathlete/2" alt="Recent Article 1">
+
 ---
 [![](https://visitcount.itsvg.in/api?id=JessicaRudd&icon=0&color=0)](https://visitcount.itsvg.in)
