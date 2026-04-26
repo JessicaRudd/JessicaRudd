@@ -47,29 +47,30 @@ jobs:
               items = data.get("items", [])[:3]
               
               if not items:
+                  print("No items found in feed.")
                   sys.exit(1)
 
               links = [f"- [{p.get('title')}]({p.get('link')})" for p in items]
-              # Note the added newlines to ensure clean separation
-              new_block = "\n\n" + "\n".join(links) + "\n\n"
+              
+              # Build the block INCLUDING the tags so they persist for the next run
+              start_tag = ""
+              end_tag = ""
+              new_block = f"{start_tag}\n\n" + "\n".join(links) + f"\n\n{end_tag}"
 
               with open("README.md", "r", encoding="utf-8") as f:
                   content = f.read()
 
-              start_tag = ""
-              end_tag = ""
-
               if start_tag in content and end_tag in content:
-                  # Robust replacement using split/join to avoid index errors
+                  # This cuts the file into three pieces and swaps the middle
                   header = content.split(start_tag)[0]
                   footer = content.split(end_tag)[1]
                   new_readme = header + new_block + footer
                   
                   with open("README.md", "w", encoding="utf-8") as f:
                       f.write(new_readme)
-                  print("README updated successfully in place.")
+                  print("README updated successfully.")
               else:
-                  print("Markers not found. Check README for tags.")
+                  print(f"Markers not found in content. Ensure {start_tag} exists.")
                   sys.exit(1)
           except Exception as e:
               print(f"Error: {e}")
