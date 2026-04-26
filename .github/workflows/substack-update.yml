@@ -2,8 +2,8 @@ name: Latest Substack Posts
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Updates daily at midnight
-  workflow_dispatch: # Allows manual trigger from the Actions tab
+    - cron: '0 0 * * *'
+  workflow_dispatch: 
 
 jobs:
   update-readme:
@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history so pull/rebase works
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -22,79 +24,60 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Sync with Remote
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git pull origin main
+
       - name: Update README
         run: |
           python << END
           import requests
           import sys
 
-          # 1. Use the RSS2JSON proxy to bypass Substack's Cloudflare block
+          # 1. Fetch via Proxy
           rss_url = "https://funsizedatabytes.substack.com/feed"
           proxy_url = f"https://api.rss2json.com/v1/api.json?rss_url={rss_url}"
           
           try:
-              print(f"Fetching via Proxy: {proxy_url}")
               response = requests.get(proxy_url, timeout=20)
               response.raise_for_status()
               data = response.json()
-              
-              if data.get("status") != "ok":
-                  print(f"Proxy error: {data.get('message')}")
-                  sys.exit(1)
-
               items = data.get("items", [])[:3]
+              
               if not items:
-                  print("No posts found in proxy response.")
                   sys.exit(1)
 
-              # 2. Build the Markdown list
-              links = []
-              for post in items:
-                  title = post.get('title')
-                  link = post.get('link')
-                  links.append(f"- [{title}]({link})")
+              links = [f"- [{p.get('title')}]({p.get('link')})" for p in items]
+              # Note the added newlines to ensure clean separation
+              new_block = "\n\n" + "\n".join(links) + "\n\n"
 
-              new_block = "\n" + "\n".join(links) + "\n\n"
-
-              # 3. Target and Update the README file
               with open("README.md", "r", encoding="utf-8") as f:
-                  lines = f.readlines()
+                  content = f.read()
 
               start_tag = ""
               end_tag = ""
-              
-              start_idx = next((i for i, line in enumerate(lines) if start_tag in line), -1)
-              end_idx = next((i for i, line in enumerate(lines) if end_tag in line), -1)
 
-              if start_idx != -1 and end_idx != -1:
-                  # Replace the section between the tags
-                  lines[start_idx:end_idx+1] = [new_block]
+              if start_tag in content and end_tag in content:
+                  # Robust replacement using split/join to avoid index errors
+                  header = content.split(start_tag)[0]
+                  footer = content.split(end_tag)[1]
+                  new_readme = header + new_block + footer
+                  
                   with open("README.md", "w", encoding="utf-8") as f:
-                      f.writelines(lines)
-                  print("README updated successfully.")
+                      f.write(new_readme)
+                  print("README updated successfully in place.")
               else:
-                  print("Error: Markers not found in README.md")
+                  print("Markers not found. Check README for tags.")
                   sys.exit(1)
           except Exception as e:
               print(f"Error: {e}")
               sys.exit(1)
           END
 
-      - name: Commit changes
+      - name: Commit and Push
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          # 1. Stash the changes we just made to the README
-          git stash
-          
-          # 2. Pull the latest from the remote (your manual marker edits)
-          git pull --rebase origin main
-          
-          # 3. Pop the stash back on top of the fresh README
-          git stash pop || echo "No stash to pop"
-          
-          # 4. Final add and commit
           git add README.md
-          git commit -m "Update Substack posts via Proxy" || echo "No changes to commit"
-          git push
+          git commit -m "Update Substack posts" || echo "No changes to commit"
+          git push origin main
