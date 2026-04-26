@@ -1,4 +1,8 @@
-🔭 I’m currently building next-gen data for AI<br>🌱 I’m currently building data engineering and data science production pipelines<br>💬 Ask me about Data Engineering from the perspective of a social scientist (BA Anthropology, Masters in Public Health - Epidemiology), and data-centric AI!<br>😄 Pronouns: She/Her<br>⚡ Fun fact: I'm an endurance athlete and have run dozens of marathons and ultramarathons, including 100 miles in 22 hours 44 minutes.<br>
+
+- [Automating My GDE Life: From Manual Entry to One-Click Submission](https://funsizedatabytes.substack.com/p/automate-gde-reporting-mcp-antigravity)
+- [Folio: Reclaiming Social Sharing with Intention](https://funsizedatabytes.substack.com/p/folio-beta-privacy-social-sharin)
+- [Zero to V1](https://funsizedatabytes.substack.com/p/zero-to-v1-rapid-prototyping-gemini)
+
 
 ## 🌐 How to reach me:
 [![Bluesky](https://img.shields.io/badge/Bluesky-0285FF?style=for-the-badge&logo=Bluesky&logoColor=white)](https://bsky.app/profile/funsizeathlete.bsky.social) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/jmrudd) [![Substack](https://img.shields.io/badge/Substack-%23006f5c.svg?style=for-the-badge&logo=substack&logoColor=FF6719)](https://funsizedatabytes.substack.com/) [![Dev.to](https://img.shields.io/badge/dev.to-0A0A0A?style=for-the-badge&logo=devdotto&logoColor=white)](https://dev.to/funsize_engineer)
