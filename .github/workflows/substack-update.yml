@@ -55,8 +55,8 @@ jobs:
               links = [f"- [{p.get('title')}]({p.get('link')})" for p in items]
               
               # 3. Define the Markers (CRITICAL: Do not leave these empty)
-              start_tag = ""
-              end_tag = ""
+              start_tag = ''
+              end_tag = ''
               
               # Build the block (putting the tags back in so they persist)
               new_block = f"{start_tag}\n\n" + "\n".join(links) + f"\n\n{end_tag}"
