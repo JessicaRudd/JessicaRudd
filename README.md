@@ -18,6 +18,10 @@
 
 **👇 Latest Articles 👇**
 
+- [Automating My GDE Life: From Manual Entry to One-Click Submission](https://funsizedatabytes.substack.com/p/automate-gde-reporting-mcp-antigravity)
+- [Folio: Reclaiming Social Sharing with Intention](https://funsizedatabytes.substack.com/p/folio-beta-privacy-social-sharin)
+- [Zero to V1](https://funsizedatabytes.substack.com/p/zero-to-v1-rapid-prototyping-gemini)
+
 **👆 End Articles 👆**
 
 ---
