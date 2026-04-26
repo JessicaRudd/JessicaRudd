@@ -2,8 +2,8 @@ name: Latest Substack Posts
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Updates daily at midnight
-  workflow_dispatch: # Allows manual trigger from the Actions tab
+    - cron: '0 0 * * *'
+  workflow_dispatch: 
 
 jobs:
   update-readme:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetches full history for stable git operations
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -32,16 +32,14 @@ jobs:
 
       - name: Update README
         run: |
-          python << END
+          python << 'EOF'
           import requests
           import sys
 
-          # 1. Fetch via Proxy to bypass Cloudflare 403
           rss_url = "https://funsizedatabytes.substack.com/feed"
           proxy_url = f"https://api.rss2json.com/v1/api.json?rss_url={rss_url}"
           
           try:
-              print(f"Fetching: {proxy_url}")
               response = requests.get(proxy_url, timeout=20)
               response.raise_for_status()
               data = response.json()
@@ -51,39 +49,41 @@ jobs:
                   print("No posts found.")
                   sys.exit(1)
 
-              # 2. Format the links
+              # Format the 3 most recent links
               links = [f"- [{p.get('title')}]({p.get('link')})" for p in items]
               
-              # 3. Define the Markers (CRITICAL: Do not leave these empty)
-              # PARSER-PROOF TAGS
-              start_tag = "<!" + "-- BLOG-POST-LIST:START --" + ">"
-              end_tag = "<!" + "-- BLOG-POST-LIST:END --" + ">"
+              # VISIBLE MARKERS (No HTML comments to get stripped)
+              start_tag = "**👇 Latest Articles 👇**"
+              end_tag = "**👆 End Articles 👆**"
               
-              # Build the block (putting the tags back in so they persist)
-              new_block = f"{start_tag}\n\n" + "\n".join(links) + f"\n\n{end_tag}"
-
               with open("README.md", "r", encoding="utf-8") as f:
                   content = f.read()
 
-              # 4. Perform the "Sandwich" replacement
+              # The Overwrite Logic: 
+              # 1. Take everything before the start tag
+              # 2. Add the start tag, the new links, and the end tag
+              # 3. Take everything after the end tag
               if start_tag in content and end_tag in content:
                   header = content.split(start_tag)[0]
                   footer = content.split(end_tag)[1]
+                  
+                  new_block = start_tag + "\n\n" + "\n".join(links) + "\n\n" + end_tag
                   new_readme = header + new_block + footer
                   
                   with open("README.md", "w", encoding="utf-8") as f:
                       f.write(new_readme)
-                  print("README updated successfully.")
+                  print("README successfully overwritten with latest posts.")
               else:
-                  print("Markers not found in README. Make sure they are in the file.")
+                  print("Visible markers not found in README. Please add them.")
                   sys.exit(1)
           except Exception as e:
               print(f"Error: {e}")
               sys.exit(1)
-          END
+          EOF
 
       - name: Commit and Push
         run: |
           git add README.md
+          # This prevents failure if the Substack hasn't been updated
           git commit -m "Update Substack posts" || echo "No changes to commit"
           git push origin main
