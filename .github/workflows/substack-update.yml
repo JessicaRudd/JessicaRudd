@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetches all history so pull/rebase works
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -36,7 +36,6 @@ jobs:
           import requests
           import sys
 
-          # 1. Fetch via Proxy
           rss_url = "https://funsizedatabytes.substack.com/feed"
           proxy_url = f"https://api.rss2json.com/v1/api.json?rss_url={rss_url}"
           
@@ -47,21 +46,22 @@ jobs:
               items = data.get("items", [])[:3]
               
               if not items:
-                  print("No items found in feed.")
+                  print("Proxy returned no data.")
                   sys.exit(1)
 
               links = [f"- [{p.get('title')}]({p.get('link')})" for p in items]
               
-              # Build the block INCLUDING the tags so they persist for the next run
+              # THE MARKERS MUST BE EXACTLY THESE STRINGS
               start_tag = ""
               end_tag = ""
+              
+              # Build the block AND re-insert the tags for the next run
               new_block = f"{start_tag}\n\n" + "\n".join(links) + f"\n\n{end_tag}"
 
               with open("README.md", "r", encoding="utf-8") as f:
                   content = f.read()
 
               if start_tag in content and end_tag in content:
-                  # This cuts the file into three pieces and swaps the middle
                   header = content.split(start_tag)[0]
                   footer = content.split(end_tag)[1]
                   new_readme = header + new_block + footer
@@ -70,7 +70,7 @@ jobs:
                       f.write(new_readme)
                   print("README updated successfully.")
               else:
-                  print(f"Markers not found in content. Ensure {start_tag} exists.")
+                  print("Could not find markers in README. Ensure tags are present.")
                   sys.exit(1)
           except Exception as e:
               print(f"Error: {e}")
